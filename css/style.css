@@ -51,7 +51,6 @@ header {
 }
 
 main{
-    height: 590px;
     background: #000000;
     background: linear-gradient(90deg,#000000 0%, #052c4e 80%);
     background: -webkit-linear-gradient(90deg,#000000 0%, #052c4e 80%);
@@ -104,4 +103,45 @@ footer{
     border: 1px solid white;
     background-color: #00000081;
     width: 850px;
+}
+
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px;
+}
+.card-img-top {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #0056b3;
+} 
+
+.catalogo{
+    margin: 30px;
+    height: auto;
+    border-top: 5px double white;
+    border-bottom: 5px double white;
 }
