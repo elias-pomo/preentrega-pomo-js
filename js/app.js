@@ -81,7 +81,9 @@ const productos = [
     new producto(9, "../img/pantalon3.jpeg", 12800, "pantalon", 10, "negro", 46, "Pantalon Clasic"),
     new producto(10, "../img/pantalon4.jpeg", 15000, "pantalon", 3, "beige", 46, "Pantalon Star"),
 ]
-function armadorTarjetas(){
+// FUNCIONES //
+
+function armadorTarjetas() {
     for (producto of productos) {
         // Crear la tarjeta
         const crearCardProducto = (producto) => {
@@ -90,52 +92,56 @@ function armadorTarjetas(){
             card.className = "card";
             card.style.width = "18rem";
             card.style.margin = "1rem";
-    
+
             // Crear la imagen del producto
             const img = document.createElement("img");
             img.className = "card-img-top";
             img.src = producto.imagen;
             img.alt = producto.titulo;
-    
+
             // Crear el cuerpo de la tarjeta
             const cardBody = document.createElement("div");
             cardBody.className = "card-body";
-    
+
             // Título del producto
             const titulo = document.createElement("h5");
             titulo.className = "card-title";
             titulo.textContent = producto.titulo;
-    
+
             // Precio
             const precio = document.createElement("p");
             precio.className = "card-text";
             precio.innerHTML = `<strong>Precio:</strong> ${producto.precio}`;
-    
+
             // Categoría
             const categoria = document.createElement("p");
             categoria.className = "card-text";
             categoria.innerHTML = `<strong>Categoría:</strong> ${producto.categoria}`;
-    
+
             // Stock
             const stock = document.createElement("p");
             stock.className = "card-text";
             stock.innerHTML = `<strong>Stock:</strong> ${producto.stock > 0 ? producto.stock : "Agotado"}`;
-    
+
             // Color
             const color = document.createElement("p");
             color.className = "card-text";
             color.innerHTML = `<strong>Color:</strong> ${producto.color}`;
-    
+
             // Talle
             const talle = document.createElement("p");
             talle.className = "card-text";
             talle.innerHTML = `<strong>Talle:</strong> ${producto.talle}`;
-    
-            // Botón de acción (opcional)
+
+            // Botón 
             const boton = document.createElement("button");
-            boton.className = "btn btn-primary onclick=añadirProducto();";
+            boton.className = "btn btn-primary";
             boton.textContent = "Agregar al carrito";
-    
+
+            boton.addEventListener("click", () => {
+                añadirProducto(producto);
+            });
+
             // Agregar elementos al cuerpo de la tarjeta
             cardBody.appendChild(titulo);
             cardBody.appendChild(precio);
@@ -144,11 +150,11 @@ function armadorTarjetas(){
             cardBody.appendChild(color);
             cardBody.appendChild(talle);
             cardBody.appendChild(boton);
-    
+
             // Agregar imagen y cuerpo al contenedor principal
             card.appendChild(img);
             card.appendChild(cardBody);
-    
+
             return card;
         };
         const contenedor = document.getElementById("contenedor"); // Asegúrate de tener un contenedor con este ID en tu HTML
@@ -156,26 +162,20 @@ function armadorTarjetas(){
         contenedor.appendChild(cardProducto);
     };
 }
-armadorTarjetas();
-
-const mostrarProductos = (productos) => {
-    const contenedor = document.getElementById("contenedor");
-}
-/* filtrar por categoria */
 function filtroCategoria() {
 
     let parametro = document.getElementById("categoriaRopa").value;
     const categoria = productos.filter((producto) => producto.categoria === parametro);
     console.log(categoria);
-    if(parametro != ""){
+    if (parametro != "") {
         contenedor.innerHTML = "";
         ;
-    }else{
+    } else {
         contenedor.innerHTML = "";
         armadorTarjetas()
     }
-    
-    for(producto of categoria){
+
+    for (producto of categoria) {
         // Crear la tarjeta
         function crearCardProducto(producto) {
             // Crear el contenedor principal de la tarjeta
@@ -183,52 +183,56 @@ function filtroCategoria() {
             card.className = "card";
             card.style.width = "18rem";
             card.style.margin = "1rem";
-    
+
             // Crear la imagen del producto
             const img = document.createElement("img");
             img.className = "card-img-top";
             img.src = producto.imagen;
             img.alt = producto.titulo;
-    
+
             // Crear el cuerpo de la tarjeta
             const cardBody = document.createElement("div");
             cardBody.className = "card-body";
-    
+
             // Título del producto
             const titulo = document.createElement("h5");
             titulo.className = "card-title";
             titulo.textContent = producto.titulo;
-    
+
             // Precio
             const precio = document.createElement("p");
             precio.className = "card-text";
             precio.innerHTML = `<strong>Precio:</strong> ${producto.precio}`;
-    
+
             // Categoría
             const categoria = document.createElement("p");
             categoria.className = "card-text";
             categoria.innerHTML = `<strong>Categoría:</strong> ${producto.categoria}`;
-    
+
             // Stock
             const stock = document.createElement("p");
             stock.className = "card-text";
             stock.innerHTML = `<strong>Stock:</strong> ${producto.stock > 0 ? producto.stock : "Agotado"}`;
-    
+
             // Color
             const color = document.createElement("p");
             color.className = "card-text";
             color.innerHTML = `<strong>Color:</strong> ${producto.color}`;
-    
+
             // Talle
             const talle = document.createElement("p");
             talle.className = "card-text";
             talle.innerHTML = `<strong>Talle:</strong> ${producto.talle}`;
-    
+
             // Botón de acción (opcional)
             const boton = document.createElement("button");
             boton.className = "btn btn-primary";
             boton.textContent = "Agregar al carrito";
-    
+
+            boton.addEventListener("click", () => {
+                añadirProducto(producto);
+            });
+
             // Agregar elementos al cuerpo de la tarjeta
             cardBody.appendChild(titulo);
             cardBody.appendChild(precio);
@@ -237,23 +241,50 @@ function filtroCategoria() {
             cardBody.appendChild(color);
             cardBody.appendChild(talle);
             cardBody.appendChild(boton);
-    
+
             // Agregar imagen y cuerpo al contenedor principal
             card.appendChild(img);
             card.appendChild(cardBody);
-    
+
             return card;
         }
         const contenedor = document.getElementById("contenedor"); // Asegúrate de tener un contenedor con este ID en tu HTML
         const cardProducto = crearCardProducto(producto);
         contenedor.appendChild(cardProducto);
     };
-    
 
-    };
-function añadirProducto(){
-console.log("sexo");
+
+};
+let Carrito = [];
+function actualizarCarrito() {
+    const carritoContenedor = document.getElementById("carrito"); // Asegúrate de tener este contenedor en tu HTML
+    carritoContenedor.innerHTML = ""; // Limpia el contenido previo
+
+    Carrito.forEach((producto) => {
+        const item = document.createElement("p");
+        item.textContent = `${producto.titulo} - $${producto.precio} --- `;
+        carritoContenedor.appendChild(item);
+    });
 }
+
+function añadirProducto(producto) {
+
+    Carrito.push(producto);
+
+    console.log("Producto añadito: " + producto);
+    console.log("carrito actual: " + Carrito);
+
+    actualizarCarrito();
+}
+
+
+// -------------- //    
+armadorTarjetas();
+
+const mostrarProductos = (productos) => {
+    const contenedor = document.getElementById("contenedor");
+}
+/* filtrar por categoria */
 
 
 

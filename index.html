@@ -77,12 +77,22 @@
     </section>
 
     <section class="catalogo">
-      <div>
-        <input type="text" id="categoriaRopa" placeholder="Ingrese la prenda que busca" style="width: 250px;" />
-        <button onclick="filtroCategoria();"> Filtrar </button>
+      <div class="catalogo-1">
+        <h2>¡NUESTRO CATALOGO!</h2>
+        <H3>mira un poco de todo lo que tenemos para ofrecerte</H3>
+        <div>
+          <input type="text" id="categoriaRopa" placeholder="Ingrese la prenda que busca" style="width: 250px;" />
+          <button onclick="filtroCategoria();"> Filtrar </button>
+        </div>
+        <div id="contenedor" class="d-flex flex-wrap"></div>
       </div>
 
-      <div id="contenedor" class="d-flex flex-wrap"></div>
+      <div class="carro">
+        <h2>CARRITO DE COMPRAS</h2>
+        <h3>aca vas a encontrar los productos que agregaste</h3>
+        <div id="carrito" class="d-flex flex-wrap"></div>
+        <button class="checkout">PAGAR</button>
+      </div>
 
     </section>
 
